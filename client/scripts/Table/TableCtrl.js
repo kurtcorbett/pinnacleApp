@@ -169,6 +169,7 @@
       $scope.numPerPage = $scope.numPerPageOpt[2];
       $scope.currentPage = 1;
       $scope.currentPageStores = [];
+//      $scope.showTextBox = function
       init = function() {
         $scope.search();
         return $scope.select($scope.currentPage);

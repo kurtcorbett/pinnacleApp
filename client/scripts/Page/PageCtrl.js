@@ -2,9 +2,9 @@
   'use strict';
   angular.module('app.page.ctrls', []).controller('invoiceCtrl', [
     '$scope', '$window', function($scope, $window) {
-      return $scope.printInvoice = function() {
+      return $scope.printPage = function() {
         var originalContents, popupWin, printContents;
-        printContents = document.getElementById('invoice').innerHTML;
+        printContents = document.getElementById('ordersTable').innerHTML;
         originalContents = document.body.innerHTML;
         popupWin = window.open();
         popupWin.document.open();
