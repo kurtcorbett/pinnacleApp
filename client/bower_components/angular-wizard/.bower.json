@@ -1,0 +1,28 @@
+{
+  "name": "angular-wizard",
+  "version": "0.3.0",
+  "main": "./dist/angular-wizard.js",
+  "description": "Easy to use Wizard library for AngularJS",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mgonto/angular-wizard.git"
+  },
+  "dependencies": {
+    "angular": "*"
+  },
+  "ignore": [
+    "node_modules",
+    "components",
+    "lib"
+  ],
+  "homepage": "https://github.com/mgonto/angular-wizard",
+  "_release": "0.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.3.0",
+    "commit": "36b67144088cfadc652120d4b59fd2b82670e9b0"
+  },
+  "_source": "git://github.com/mgonto/angular-wizard.git",
+  "_target": "~0.3.0",
+  "_originalSource": "angular-wizard"
+}

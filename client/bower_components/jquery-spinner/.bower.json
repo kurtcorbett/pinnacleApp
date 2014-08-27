@@ -1,0 +1,14 @@
+{
+  "name": "jquery-spinner",
+  "homepage": "https://github.com/xixilive/jquery-spinner",
+  "version": "0.1.5",
+  "_release": "0.1.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.5",
+    "commit": "bcc1846f88cd0dd9a9e3e433cf3492b7b67dd07c"
+  },
+  "_source": "git://github.com/xixilive/jquery-spinner.git",
+  "_target": "~0.1.5",
+  "_originalSource": "jquery-spinner"
+}

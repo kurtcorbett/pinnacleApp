@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: directives/marker.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: directives/marker.js</h1>
+
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @ngdoc directive
+ * @name marker
+ * @requires Attr2Options 
+ * @requires GeoCoder
+ * @requires NavigatorGeolocation
+ * @description 
+ *   Initialize a Google map marker in map with given options and register events  
+ *   
+ *   Requires:  map directive
+ *
+ *   Restrict To:  Element Or Attribute
+ *
+ * @param {String} position address, 'current', or [latitude, longitude]  
+ *    example:  
+ *      '1600 Pennsylvania Ave, 20500  Washingtion DC',   
+ *      'current position',  
+ *      '[40.74, -74.18]'  
+ * @param {Boolean} centered if set, map will be centered with this marker
+ * @param {String} &amp;lt;MarkerOption> Any Marker options, https://developers.google.com/maps/documentation/javascript/reference?csw=1#MarkerOptions  
+ * @param {String} &amp;lt;MapEvent> Any Marker events, https://developers.google.com/maps/documentation/javascript/reference
+ * @example
+ * Usage: 
+ *   &lt;map MAP_ATTRIBUTES>
+ *    &lt;marker ANY_MARKER_OPTIONS ANY_MARKER_EVENTS">&lt;/MARKER>
+ *   &lt;/map>
+ *
+ * Example: 
+ *   &lt;map center="[40.74, -74.18]">
+ *    &lt;marker position="[40.74, -74.18]" on-click="myfunc()">&lt;/div>
+ *   &lt;/map>
+ *
+ *   &lt;map center="the cn tower">
+ *    &lt;marker position="the cn tower" on-click="myfunc()">&lt;/div>
+ *   &lt;/map>
+ */
+ngMap.directives.marker  = function(Attr2Options, GeoCoder, NavigatorGeolocation) {
+  var parser = Attr2Options;
+
+  return {
+    restrict: 'AE',
+    require: '^map',
+    link: function(scope, element, attrs, mapController) {
+      //var filtered = new parser.filter(attrs);
+      var filtered = parser.filter(attrs);
+      scope.google = google;
+      var markerOptions = parser.getOptions(filtered, scope);
+      var markerEvents = parser.getEvents(scope, filtered);
+
+      var getMarker = function(options, events) {
+        var marker = new google.maps.Marker(options);
+        if (Object.keys(events).length > 0) {
+          console.log("markerEvents", events);
+        }
+        for (var eventName in events) {
+          if (eventName) {
+            google.maps.event.addListener(marker, eventName, events[eventName]);
+          }
+        }
+        return marker;
+      };
+
+      if (markerOptions.position instanceof Array) {
+
+        var lat = markerOptions.position[0]; 
+        var lng = markerOptions.position[1];
+        markerOptions.position = new google.maps.LatLng(lat,lng);
+
+        console.log("adding marker with options, ", markerOptions);
+
+        /**
+         * ng-repeat does not happen while map tag is initialized
+         * so add markers after it is initialized
+         */
+        var marker = getMarker(markerOptions, markerEvents);
+        if (markerOptions.ngRepeat) { 
+          mapController.addMarker(marker);
+        } else {
+          mapController.markers.push(marker);
+        }
+      } else if (typeof markerOptions.position == 'string') { //need to get lat/lng
+
+        var position = markerOptions.position;
+
+        if (position.match(/^current/i)) { // sensored position
+
+          NavigatorGeolocation.getCurrentPosition()
+            .then(function(position) {
+              var lat = position.coords.latitude, lng = position.coords.longitude;
+              markerOptions.position = new google.maps.LatLng(lat, lng);
+              var marker = getMarker(markerOptions, markerEvents);
+              mapController.addMarker(marker);
+            });
+
+        } else { //assuming it is address
+
+          GeoCoder.geocode({address: markerOptions.position})
+            .then(function(results) {
+              var latLng = results[0].geometry.location;
+              markerOptions.position = latLng;
+              var marker = getMarker(markerOptions, markerEvents);
+              mapController.addMarker(marker);
+            });
+
+        } 
+      } else {
+        console.error('invalid marker position', markerOptions.position);
+      }
+    } //link
+  }; // return
+};// function
+ngMap.directives.marker.$inject  = ['Attr2Options', 'GeoCoder', 'NavigatorGeolocation'];
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-ngMap.html">ngMap</a></li></ul><h3>service</h3><ul><li><a href="Attr2Options.html">Attr2Options</a></li><li><a href="GeoCoder.html">GeoCoder</a></li><li><a href="NavigatorGeolocation.html">NavigatorGeolocation</a></li><li><a href="StreetView.html">StreetView</a></li></ul><h3>directive</h3><ul><li><a href="info-window.html">info-window</a></li><li><a href="map.html">map</a></li><li><a href="MapController.html">MapController</a></li><li><a href="marker.html">marker</a></li><li><a href="marker-clusterer.html">marker-clusterer</a></li><li><a href="shape.html">shape</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha8</a> 
+    using <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template </a> 
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script>
+  // scroll to the current document navigation
+  var href=window.location.href.match(/\/([^\/]+$)/)[1];
+  if (currentNav = document.querySelector("nav a[href='"+href+"']"))
+    currentNav.scrollIntoView(true);
+  // scroll to the top of the document
+  if (window.location.hash == "")
+    document.querySelector("body").scrollIntoView(true);
+  // adjust the width of main section by navigation width
+  var navWidth = document.querySelector('nav').getBoundingClientRect().width;
+  var mainWidth = document.querySelector('#main').getBoundingClientRect().width;
+  document.querySelector('#main').style.width = (mainWidth - navWidth)+'px';
+</script>
+</body>
+</html>
