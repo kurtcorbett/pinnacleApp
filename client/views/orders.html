@@ -102,55 +102,15 @@
         <table id="ordersTable" class="table table-bordered table-hover table-responsive">
             <thead>
             <tr>
-                <th><div class="th">
-                    Date
-                        <span class="fa fa-angle-up"
-                              data-ng-click=" order('name') "
-                              data-ng-class="{active: row == 'name'}"></span>
-                        <span class="fa fa-angle-down"
-                              data-ng-click=" order('-name') "
-                              data-ng-class="{active: row == '-name'}"></span>
-                </div></th>
-                <th><div class="th">
-                    Vendor
-                        <span class="fa fa-angle-up"
-                              data-ng-click=" order('price') "
-                              data-ng-class="{active: row == 'price'}"></span>
-                        <span class="fa fa-angle-down"
-                              data-ng-click=" order('-price') "
-                              data-ng-class="{active: row == '-price'}"></span>
-                </div></th>
-                <th><div class="th">
-                    Distributor
-                        <span class="fa fa-angle-up"
-                              data-ng-click=" order('sales') "
-                              data-ng-class="{active: row == 'sales'}"></span>
-                        <span class="fa fa-angle-down"
-                              data-ng-click=" order('-sales') "
-                              data-ng-class="{active: row == '-sales'}"></span>
-                </div></th>
-                <th><div class="th">
-                    Amount
-                        <span class="fa fa-angle-up"
-                              data-ng-click=" order('sales') "
-                              data-ng-class="{active: row == 'sales'}"></span>
-                        <span class="fa fa-angle-down"
-                              data-ng-click=" order('-sales') "
-                              data-ng-class="{active: row == '-sales'}"></span>
-                </div></th>
-                <th><div class="th">
-                    PO Number
-                        <span class="fa fa-angle-up"
-                              data-ng-click=" order('rating') "
-                              data-ng-class="{active: row == 'rating'}"></span>
-                        <span class="fa fa-angle-down"
-                              data-ng-click=" order('-rating') "
-                              data-ng-class="{active: row == '-rating'}"></span>
-                </div></th>
+                <th ng-click="sortBy='name';reverse=!reverse"><div class="th"> Date </div></th>
+                <th ng-click="sortBy='price';reverse=!reverse"><div class="th"> Vendor </div></th>
+                <th ng-click="sortBy='sales';reverse=!reverse"><div class="th"> Distributor </div></th>
+                <th ng-click="sortBy='rating';reverse=!reverse"><div class="th"> Amount </div></th>
+                <th ng-click="sortBy='rating';reverse=!reverse"><div class="th"> PO Number </div></th>
             </tr>
             </thead>
             <tbody>
-            <tr data-ng-repeat="store in currentPageStores">
+            <tr data-ng-repeat="store in currentPageStores | orderBy: sortBy">
                 <td>{{store.name}}</td>
                 <td>{{store.price}}</td>
                 <td>{{store.sales}}</td>
