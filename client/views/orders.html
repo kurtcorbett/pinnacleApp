@@ -99,7 +99,7 @@
             </div>
         </div>
 
-        <table id="ordersTable" class="table table-bordered table-hover table-responsive">
+        <table id="ordersTable" class="table table-bordered table-hover table-responsive" data-ng-model="customerFilter.name">
             <thead>
             <tr>
                 <th ng-click="sortBy='name';reverse=!reverse"><div class="th"> Date </div></th>
@@ -110,7 +110,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr data-ng-repeat="store in currentPageStores | orderBy: sortBy">
+            <tr data-ng-repeat="store in currentPageStores |  orderBy: sortBy:reverse">
                 <td>{{store.name}}</td>
                 <td>{{store.price}}</td>
                 <td>{{store.sales}}</td>
