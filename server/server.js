@@ -1,15 +1,13 @@
 var express = require("express");
 
 var Sequelize = require('sequelize')
-    , sequelize = new Sequelize('pinnacle', 'postgres', 'postgres', {
+    , sequelize = new Sequelize('pinnacle', 'postgres', 'Postgres1234', {
         dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
         port:    5432
     });
 
 var app = express();
 console.log('getting something');
-
-
 
 
 sequelize
