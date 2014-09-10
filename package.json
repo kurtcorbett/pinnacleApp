@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "express": "~4.8.7",
-    "pg": "~3.4.1",
+    "pg": "^3.4.2",
     "sequelize": "^1.7.10"
   }
 }

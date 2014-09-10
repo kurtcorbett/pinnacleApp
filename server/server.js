@@ -1,7 +1,7 @@
 var express = require("express");
 
 var Sequelize = require('sequelize')
-    , sequelize = new Sequelize('pinnacle', 'postgres', 'Schweikle', {
+    , sequelize = new Sequelize('pinnacle', 'postgres', 'postgres', {
         dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
         port:    5432
     });
@@ -31,10 +31,11 @@ sequelize
     });
 
 var User = sequelize.define('User', {
-    firstName: Sequelize.STRING,
-    lastName: Sequelize.STRING,
+    id: Sequelize.INTEGER,
+    firstname: Sequelize.STRING,
+    lastname: Sequelize.STRING,
     position: Sequelize.STRING,
-    hireDate: Sequelize.DATE
+    hiredate: Sequelize.DATE
 }, {
     tableName: 'users', // this will define the table's name
     timestamps: false           // this will deactivate the timestamp columns
@@ -42,15 +43,20 @@ var User = sequelize.define('User', {
 
 User
     .create({
-        firstName: 'bob',
-        lastName: 'builder',
+        id: 10,
+        firstname: 'bob',
+        lastname: 'builder',
         position: 'inside sales',
-        hireDate: 2013-01-01
+        hiredate: 2013-01-01
     })
     .complete(function(err, user) {
-        console.log("user created!");
+        console.log(err);
         /* ... */
     });
+
+sequelize.query("SELECT * FROM users").success(function(myTableRows) {
+    console.log(myTableRows)
+});
 
 
 
