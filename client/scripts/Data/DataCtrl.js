@@ -1,5 +1,4 @@
 (function() {
-
     angular.module('app.data.ctrls', [])
 
         .controller('manufacturerCtrl', ["$scope", function($scope) {
@@ -24,6 +23,32 @@
             ]
 
         }])
+
+        .controller('distributorCtrl', ["$scope", function($scope) {
+
+            $scope.distributors = [
+                {
+                    name: "CED",
+                    location: "SLC"
+                },
+                {
+                    name: "WESCO",
+                    location: "SLC"
+                },
+                {
+                    name: "CODALE",
+                    location: "SLC"
+                },
+                {
+                    name: "GRAYBAR",
+                    location: "SLC"
+                }
+            ]
+
+        }])
+
+
+
 
 
 }());

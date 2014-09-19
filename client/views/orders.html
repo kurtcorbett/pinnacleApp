@@ -31,21 +31,21 @@
                         <div class="form-group">
                             <!--<label class="sr-only" for="exampleInputPassword2">Manufacturer</label>-->
                             <!--<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Manufacturer">-->
-                            <span class="ui-select" data-ng-controller="ManufacturersCtrl">
+                            <span class="ui-select" data-ng-controller="manufacturerCtrl">
                                 <select >
-                                    <option ng-repeat="store in stores">
-                                        {{store.name}}
+                                    <option ng-repeat="manufacturer in manufacturers">
+                                        {{manufacturer.name}}
                                     </option>
                                 </select>
                             </span>
                         </div>
-                        <div class="form-group" data-ng-controller="DistributorsCtrl">
+                        <div class="form-group" data-ng-controller="distributorCtrl">
                             <!--<label class="sr-only" for="exampleInputEmail2">Distributor</label>-->
                             <!--<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Distributor">-->
                             <span class="ui-select">
                                 <select>
-                                    <option ng-repeat="store in stores">
-                                        {{store.sales}}
+                                    <option ng-repeat="distributor in distributors">
+                                        {{distributor.name}} {{distributor.location}}
                                     </option>
                                 </select>
                             </span>
