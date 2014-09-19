@@ -1,7 +1,7 @@
 
 
 
-<div class="page page-table" data-ng-controller="tableCtrl">
+<div class="page">
 
     <section class="panel panel-default">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Order Entry</strong></div>
@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <!--<label class="sr-only" for="exampleInputPassword2">Manufacturer</label>-->
                             <!--<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Manufacturer">-->
-                            <span class="ui-select">
+                            <span class="ui-select" data-ng-controller="ManufacturersCtrl">
                                 <select >
                                     <option ng-repeat="store in stores">
                                         {{store.name}}
@@ -39,7 +39,7 @@
                                 </select>
                             </span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" data-ng-controller="DistributorsCtrl">
                             <!--<label class="sr-only" for="exampleInputEmail2">Distributor</label>-->
                             <!--<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Distributor">-->
                             <span class="ui-select">
@@ -51,12 +51,12 @@
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="sr-only" for="exampleInputPassword2">Amount</label>
-                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Amount">
+                            <label class="sr-only" for="amount">Amount</label>
+                            <input type="password" class="form-control" id="amount" placeholder="Amount">
                         </div>
                         <div class="form-group">
-                            <label class="sr-only" for="exampleInputPassword2">PO Number</label>
-                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="PO Number">
+                            <label class="sr-only" for="poNumber">PO Number</label>
+                            <input type="password" class="form-control" id="poNumber" placeholder="PO Number">
                         </div>
 
                         <button type="submit" class="btn btn-info btn-w-md">Submit</button>
@@ -74,7 +74,7 @@
         </div>
     </section>
 
-    <section class="panel panel-default table-dynamic">
+    <section class="panel panel-default table-dynamic" data-ng-controller="tableCtrl">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Orders </strong></div>
 
         <div class="table-filters">
