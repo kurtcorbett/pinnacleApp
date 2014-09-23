@@ -41,25 +41,18 @@ var User = sequelize.define('User', {
     timestamps: false           // this will deactivate the timestamp columns
 });
 
-
-app.post('/createUser', function (req,res) {
-
-        User
-            .create({
-                id: 10,
-                firstname: 'bob',
-                lastname: 'builder',
-                position: 'inside sales',
-                hiredate: 2013-01-01
-            })
-            .complete(function(err, user) {
-                console.log(err);
-                /* ... */
-            });
-
-    }
-);
-
+User
+    .create({
+        id: 10,
+        firstname: 'bob',
+        lastname: 'builder',
+        position: 'inside sales',
+        hiredate: 2013-01-01
+    })
+    .complete(function(err, user) {
+        console.log(err);
+        /* ... */
+    });
 
 sequelize.query("SELECT * FROM users").success(function(myTableRows) {
     console.log(myTableRows)

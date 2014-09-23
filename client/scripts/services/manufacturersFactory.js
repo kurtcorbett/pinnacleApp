@@ -1,5 +1,7 @@
-angular.module('app')
-    .factory('manufacturerService', function($http){
+(function() {
+
+    var manufacturersFactory = function() {
+
         var manufacturers = [
             {
                 name: "Acme",
@@ -18,10 +20,16 @@ angular.module('app')
                 product: "Digital Tools"
             }
         ];
-        return {
-            getManufacturers: function() {
-                return manufacturers;
-            }
+
+        var factory = {};
+        factory.getManufacturers = function() {
+            return manufacturers;
         };
 
-    });
+        return factory;
+
+    };
+
+    angular.module('app').factory('manufacturersFactory', manufacturersFactory);
+
+}());

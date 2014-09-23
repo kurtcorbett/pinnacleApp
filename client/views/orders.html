@@ -33,7 +33,7 @@
                             <!--<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Manufacturer">-->
                             <span class="ui-select" data-ng-controller="manufacturerCtrl">
                                 <select >
-                                    <option ng-repeat="manufacturer in manufacturers">
+                                    <option data-ng-repeat="manufacturer in manufacturers">
                                         {{manufacturer.name}}
                                     </option>
                                 </select>

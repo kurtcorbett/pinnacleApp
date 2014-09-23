@@ -1,8 +1,18 @@
-Angular.module('app')
-    .controller('manufacturerCtl' ['manufacturerService', function(manufacturerService) {
+(function() {
 
+    var manufacturerCtrl = function($scope,manufacturersFactory) {
 
-        $scope.manufacturers = getManfucturers();
+        $scope.manufacturers = [];
 
+        function init() {
+            $scope.manufacturers = manufacturersFactory.getManufacturers();
+        }
 
-    }]);
+        init();
+
+    };
+
+    angular.module('app')
+        .controller('manufacturerCtrl', manufacturerCtrl);
+
+}());
