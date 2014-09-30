@@ -1,6 +1,7 @@
 (function() {
 
     var distributorCtrl = function($scope,distributorsFactory) {
+
         $scope.distributors = [];
 
         function init() {
@@ -12,6 +13,7 @@
 
     };
 
-    angular.module('app').controller('distributorCtrl',distributorCtrl);
+    angular.module('app')
+        .controller('distributorCtrl',distributorCtrl);
 
 }());

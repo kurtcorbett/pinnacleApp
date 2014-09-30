@@ -7,7 +7,7 @@
   ]).controller('DatepickerDemoCtrl', [
     '$scope', function($scope) {
       $scope.today = function() {
-        return $scope.dt = new Date();
+        return $scope.order.date = new Date();
       };
       $scope.today();
       $scope.showWeeks = true;
@@ -15,7 +15,7 @@
         return $scope.showWeeks = !$scope.showWeeks;
       };
       $scope.clear = function() {
-        return $scope.dt = null;
+        return $scope.order.date = null;
       };
       $scope.disabled = function(date, mode) {
         return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);

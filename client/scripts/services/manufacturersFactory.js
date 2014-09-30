@@ -21,12 +21,11 @@
             }
         ];
 
-        var factory = {};
-        factory.getManufacturers = function() {
-            return manufacturers;
+        return {
+            getManufacturers: function () {
+                return manufacturers;
+            }
         };
-
-        return factory;
 
     };
 
