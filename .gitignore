@@ -1,2 +1,6 @@
 # Created by .gitignore support plugin (hsz.mobi)
 .idea/
+.sass-cache
+.tmp
+./node_modules
+node_modules/
