@@ -1,6 +1,11 @@
 (function() {
+    'use strict';
 
     var orderCtrl = function($scope,ordersService, manufacturersFactory) {
+
+        $scope.order = {
+            date: null
+        };
 
         $scope.manufacturers = manufacturersFactory.getManufacturers();
 
