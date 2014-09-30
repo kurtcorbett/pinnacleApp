@@ -20,12 +20,14 @@
                 location: "SLC"
             }
         ];
-
-        var factory = {};
-        factory.getDistributors = function() {
-          return distributors;
+        return {
+            getDistributors: function() {
+                return distributors;
+            },
+            getDistributorsCount: function() {
+                return distributors.length;
+            }
         };
-        return factory;
     };
 
     angular.module('app').factory('distributorsFactory',distributorsFactory);

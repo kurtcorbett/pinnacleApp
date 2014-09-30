@@ -1,0 +1,17 @@
+create table users(
+   id integer PRIMARY KEY,
+   firstname varchar(25),
+   lastname varchar(25),
+   position varchar(50),
+   hiredate date
+);
+
+create table orders(
+    id SERIAL PRIMARY KEY NOT NULL,
+    user_id integer,
+    order_date date,
+    manufacturer varchar(100),
+    distributor varchar(100),
+    amount money,
+    po_number varchar(50)
+);

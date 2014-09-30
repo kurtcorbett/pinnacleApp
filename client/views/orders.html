@@ -3,27 +3,30 @@
 
 <div class="page">
 
-    <section class="panel panel-default">
+    <section class="panel panel-default" data-ng-controller="orderCtrl">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Order Entry</strong></div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-3">
 
-                    <form class="form-inline" role="form">
+                    <form class="form-inline" role="form" name="orderForm">
                         <div class="panel-body" data-ng-controller="DatepickerDemoCtrl">
                             <div class="row">
                                     <div class="input-group ui-datepicker">
                                         <input type="text"
                                                class="form-control"
                                                datepicker-popup="{{format}}"
-                                               ng-model="dt"
+                                               data-ng-model="order.date"
                                                is-open="opened"
                                                min="minDate"
                                                max="'2015-06-22'"
                                                datepicker-options="dateOptions"
                                                date-disabled="disabled(date, mode)"
                                                ng-required="true"
-                                               close-text="Close">
+                                               close-text="Close"
+                                               name="date">
+                                               <!--data-ng-model="order.date"-->
+
                                         <span class="input-group-addon" ng-click="open($event)"><i class="ti-calendar"></i></span>
                                     </div>
                             </div>
@@ -31,41 +34,33 @@
                         <div class="form-group">
                             <!--<label class="sr-only" for="exampleInputPassword2">Manufacturer</label>-->
                             <!--<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Manufacturer">-->
-                            <span class="ui-select" data-ng-controller="manufacturerCtrl">
-                                <select >
-                                    <option data-ng-repeat="manufacturer in manufacturers">
-                                        {{manufacturer.name}}
-                                    </option>
-                                </select>
+                            <span class="ui-select">
+                                <select name="manufacturer" data-ng-model="order.manufacturer" data-ng-options="m.name as m.name for m in manufacturers"></select>
                             </span>
                         </div>
                         <div class="form-group" data-ng-controller="distributorCtrl">
                             <!--<label class="sr-only" for="exampleInputEmail2">Distributor</label>-->
                             <!--<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Distributor">-->
                             <span class="ui-select">
-                                <select>
-                                    <option ng-repeat="distributor in distributors">
-                                        {{distributor.name}} {{distributor.location}}
-                                    </option>
-                                </select>
+                                <select name="distributor" data-ng-model="order.distributor" data-ng-options="d.name as d.name for d in distributors" required ></select>
                             </span>
                         </div>
                         <div class="form-group">
                             <label class="sr-only" for="amount">Amount</label>
-                            <input type="password" class="form-control" id="amount" placeholder="Amount">
+                            <input type="number" class="form-control" id="amount" placeholder="Amount" name="amount" data-ng-model="order.amount" required >
                         </div>
                         <div class="form-group">
-                            <label class="sr-only" for="poNumber">PO Number</label>
-                            <input type="password" class="form-control" id="poNumber" placeholder="PO Number">
+                            <label class="sr-only" for="poNumber" required>PO Number</label>
+                            <input type="text" class="form-control" id="poNumber" placeholder="PO Number" name="poNumber" data-ng-model="order.poNumber" required >
                         </div>
 
-                        <button type="submit" class="btn btn-info btn-w-md">Submit</button>
+                        <button type="submit" class="btn btn-info btn-w-md" data-ng-disabled="orderForm.$invalid" data-ng-click="submitOrder()">Submit</button>
                         <span class="space"></span>
                         <label class="ui-switch ui-switch-success">
                             <input type="checkbox" data-ng-click="isCollapsed = !isCollapsed"><i></i>   Add Notes</label>
                             <div class="divider divider-md"></div>
                             <div collapse="!isCollapsed" class="col-sm-10">
-                                <textarea name="" id="" class="form-control" rows="4"></textarea>
+                                <textarea name="notes" id="" class="form-control" rows="4" data-ng-model="order.notes"></textarea>
                             </div>
                     </form>
 
@@ -90,7 +85,7 @@
                 </div>
                 <div class="col-sm-3 col-xs-6 filter-result-info">
                     <span>
-                        Showing {{filteredStores.length}}/{{stores.length}} entries
+                        Showing {{filteredStores.length}}/{{orders.length}} entries
                     </span>
                 </div>
                 <div class="form-inline" data-ng-controller="invoiceCtrl">
@@ -102,20 +97,20 @@
         <table id="ordersTable" class="table table-bordered table-hover table-responsive" data-ng-model="customerFilter.name">
             <thead>
             <tr>
-                <th ng-click="sortBy='name';reverse=!reverse"><div class="th"> Date </div></th>
-                <th ng-click="sortBy='price';reverse=!reverse"><div class="th"> Vendor </div></th>
-                <th ng-click="sortBy='sales';reverse=!reverse"><div class="th"> Distributor </div></th>
-                <th ng-click="sortBy='rating';reverse=!reverse"><div class="th"> Amount </div></th>
-                <th ng-click="sortBy='rating';reverse=!reverse"><div class="th"> PO Number </div></th>
+                <th ng-click="sortBy='date';reverse=!reverse"><div class="th"> Date </div></th>
+                <th ng-click="sortBy='manufacturer';reverse=!reverse"><div class="th"> Vendor </div></th>
+                <th ng-click="sortBy='distributor';reverse=!reverse"><div class="th"> Distributor </div></th>
+                <th ng-click="sortBy='amount';reverse=!reverse"><div class="th"> Amount </div></th>
+                <th ng-click="sortBy='po_number';reverse=!reverse"><div class="th"> PO Number </div></th>
             </tr>
             </thead>
             <tbody>
-            <tr data-ng-repeat="store in currentPageStores |  orderBy: sortBy:reverse">
-                <td>{{store.name}}</td>
-                <td>{{store.price}}</td>
-                <td>{{store.sales}}</td>
-                <td>{{store.rating}}</td>
-                <td>{{store.rating}}</td>
+            <tr data-ng-repeat="order in orders |  orderBy: sortBy:reverse">
+                <td>{{order.date}}</td>
+                <td>{{order.manufacturer}}</td>
+                <td>{{order.distributor}}</td>
+                <td>{{order.amount}}</td>
+                <td>{{order.po_number}}</td>
             </tr>
             </tbody>
         </table>
