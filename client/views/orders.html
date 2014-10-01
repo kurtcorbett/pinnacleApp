@@ -72,6 +72,8 @@
     <section class="panel panel-default table-dynamic" data-ng-controller="tableCtrl">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Orders </strong></div>
 
+        <h1>{{orderTotals()}}</h1>
+
         <div class="table-filters">
             <div class="row">
                 <div class="col-sm-4 col-xs-6">
@@ -109,7 +111,7 @@
                 <td>{{order.order_date | date : 'medium'}}</td>
                 <td>{{order.manufacturer}}</td>
                 <td>{{order.distributor}}</td>
-                <td>{{order.amount}}</td>
+                <td>{{order.amount | currency }}</td>
                 <td>{{order.po_number}}</td>
             </tr>
             </tbody>

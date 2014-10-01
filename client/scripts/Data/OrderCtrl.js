@@ -12,6 +12,15 @@
 
         $scope.orders = {};
 
+        $scope.orderTotals = function () {
+            var total = 0;
+            for (var key in $scope.orders) {
+                var obj = $scope.orders[key];
+                total += obj['amount'];
+            }
+            console.log(total);
+        };
+
 
         var defaultOrder = {
             date: new Date

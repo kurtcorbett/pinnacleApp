@@ -56,7 +56,7 @@ var Order = sequelize.define('orders', {
     user_id: Sequelize.STRING,
     manufacturer: Sequelize.STRING,
     distributor: Sequelize.STRING,
-    amount: Sequelize.STRING,
+    amount: Sequelize.INTEGER,
     po_number: Sequelize.STRING
 }, {
     tableName: 'orders', // this will define the table's name
