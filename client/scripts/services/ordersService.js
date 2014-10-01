@@ -17,15 +17,15 @@
 //                });
             },
 
-            createOrder: function(order) {
+            createOrder: function(order, callback) {
                 var req = $http.post('http://localhost:3000/orders', {order: order});
                 req.success(function(data, status, headers, config) {
                     console.log(data);
+                    callback(data);
                 });
                 req.error(function(data, status, headers, config) {
                     console.log(status);
                 });
-            // ordersService.getOrders();
             }
 
         };

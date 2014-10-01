@@ -7,13 +7,32 @@
             date: null
         };
 
+
         $scope.manufacturers = manufacturersFactory.getManufacturers();
 
-        $scope.submitOrder = function() {
-            console.log("here");
-            console.log($scope.order);
-            ordersService.createOrder($scope.order);
+        $scope.orders = {};
+
+
+        var defaultOrder = {
+            date: new Date
         };
+
+
+        $scope.submitOrder = function() {
+            console.log($scope.order);
+            ordersService.createOrder($scope.order, function(data) {
+                $scope.orders = data;
+            });
+            $scope.orderForm.$setPristine();
+            $scope.order = angular.copy(defaultOrder);
+
+        };
+
+
+
+        ordersService.getOrders().then(function(result) {
+            $scope.orders = result.data;
+        });
 
 
     };

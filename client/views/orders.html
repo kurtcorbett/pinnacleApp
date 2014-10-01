@@ -1,9 +1,9 @@
 
 
 
-<div class="page">
+<div class="page" data-ng-controller="orderCtrl">
 
-    <section class="panel panel-default" data-ng-controller="orderCtrl">
+    <section class="panel panel-default">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Order Entry</strong></div>
         <div class="panel-body">
             <div class="row">
@@ -85,7 +85,7 @@
                 </div>
                 <div class="col-sm-3 col-xs-6 filter-result-info">
                     <span>
-                        Showing {{filteredStores.length}}/{{orders.length}} entries
+                        Showing {{filteredOrders.length}}/{{orders.length}} entries
                     </span>
                 </div>
                 <div class="form-inline" data-ng-controller="invoiceCtrl">
@@ -97,7 +97,7 @@
         <table id="ordersTable" class="table table-bordered table-hover table-responsive" data-ng-model="customerFilter.name">
             <thead>
             <tr>
-                <th ng-click="sortBy='date';reverse=!reverse"><div class="th"> Date </div></th>
+                <th ng-click="sortBy='order_date';reverse=!reverse"><div class="th"> Date </div></th>
                 <th ng-click="sortBy='manufacturer';reverse=!reverse"><div class="th"> Vendor </div></th>
                 <th ng-click="sortBy='distributor';reverse=!reverse"><div class="th"> Distributor </div></th>
                 <th ng-click="sortBy='amount';reverse=!reverse"><div class="th"> Amount </div></th>
@@ -105,8 +105,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr data-ng-repeat="order in orders |  orderBy: sortBy:reverse">
-                <td>{{order.date}}</td>
+            <tr data-ng-repeat="order in orders |  orderBy: sortBy: reverse | filter : searchKeywords ">
+                <td>{{order.order_date | date : 'medium'}}</td>
                 <td>{{order.manufacturer}}</td>
                 <td>{{order.distributor}}</td>
                 <td>{{order.amount}}</td>

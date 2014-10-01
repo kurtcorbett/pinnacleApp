@@ -3,7 +3,7 @@
   angular.module('app.tables', []).controller('tableCtrl', [
     '$scope', '$filter', 'ordersService', function($scope, $filter, ordersService) {
       var init;
-//      $scope.stores = [
+//      $scope.orders = [
 //        {
 //          name: 'Nijiya Market',
 //          price: '$$',
@@ -131,11 +131,8 @@
 //          rating: 4.4
 //        }
 //      ];
-      ordersService.getOrders().then(function(result) {
-          $scope.orders = result.data;
-      });
       $scope.searchKeywords = '';
-      $scope.filteredStores = [];
+      $scope.filteredOrders = [];
       $scope.row = '';
       $scope.select = function(page) {
         var end, start;
@@ -157,7 +154,7 @@
         return $scope.currentPage = 1;
       };
       $scope.search = function() {
-        $scope.filteredStores = $filter('filter')($scope.stores, $scope.searchKeywords);
+        $scope.filteredOrders = $filter('filter')($scope.orders, $scope.searchKeywords);
         return $scope.onFilterChange();
       };
       $scope.order = function(rowName) {
@@ -165,7 +162,7 @@
           return;
         }
         $scope.row = rowName;
-        $scope.filteredStores = $filter('orderBy')($scope.stores, rowName);
+        $scope.filteredOrders = $filter('orderBy')($scope.orders, rowName);
         return $scope.onOrderChange();
       };
       $scope.numPerPageOpt = [3, 5, 10, 20];

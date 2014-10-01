@@ -85,13 +85,12 @@ app.get('/orders', function(req, res) {
 
 
 app.post('/orders', function(req,res) {
-    console.log("here")
     var order = req.body.order;
-    console.log(order)
+    console.log(order);
     Order.create({
 //        id: 22,
         user_id: 4,
-//        order_date: '2014-SEP-29',
+        order_date: order.date,
         manufacturer: order.manufacturer,
         distributor: order.distributor,
         amount: order.amount,
@@ -99,9 +98,11 @@ app.post('/orders', function(req,res) {
     })
     .complete(function(err, user) {
         console.log(err);
+        sequelize.query("SELECT * FROM orders").success(function(myTableRows) {
+            res.json(myTableRows);
+        });
         /* ... */
     });
-    res.json(order);
 });
 
 
