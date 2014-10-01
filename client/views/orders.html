@@ -66,6 +66,47 @@
 
                 </div>
             </div>
+            <div class="col-lg-4">
+                <h1>{{cedPercent() | number: 0}}</h1>
+                <h3 class="text-thin">Distributors : Total Sales {{orderTotals() | currency}}</h3>
+                <div class="divider divider-dashed"></div>
+                <p>CED YTD : {{cedTotal()| currency}}</p>
+                <progressbar class="progressbar-xs progress-rounded" value="8" type="success"></progressbar>
+                <p>WESCO YTD : {{wescoTotal()| currency}}</p>
+                <progressbar class="progressbar-xs progress-rounded" value="68" type="info"></progressbar>
+                <p>CODALE YTD : {{codaleTotal()| currency}}</p>
+                <progressbar class="progressbar-xs progress-rounded" value="52" type="warning"></progressbar>
+                <p>GRAYBAR YTD : {{graybarTotal()| currency}}</p>
+                <progressbar class="progressbar-xs progress-rounded" value="77" type="danger"></progressbar>
+            </div>
+
+            <div ng-controller="chartCtrl">
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Daily Goal</h3>
+                        </div>
+                        <div class="panel-body text-center">
+                            <div easypiechart options="easypiechart.options" percent="easypiechart.percent" class="easypiechart">
+                                <span class="pie-percent" ng-bind="easypiechart.percent"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Weekly Goal</h3>
+                        </div>
+                        <div class="panel-body text-center">
+                            <div easypiechart options="easypiechart2.options" percent="easypiechart2.percent" class="easypiechart">
+                                <span class="pie-percent" ng-bind="easypiechart2.percent"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

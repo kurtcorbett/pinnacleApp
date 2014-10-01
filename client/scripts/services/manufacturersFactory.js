@@ -18,6 +18,29 @@
             {
                 name: "Fluke",
                 product: "Digital Tools"
+            },
+            {
+                name: "Ilsco",
+                product: "Digital Tools"
+            },
+            {
+                name: "Amprobe",
+                product: "Digital Tools"
+            },
+            {
+                name: "Gibson",
+                product: "Digital Tools"
+            },
+            {
+                name: "LEDtronics",
+                product: "Digital Tools"
+            },
+            {
+                name: "Accuenergy",
+                product: "Digital Tools"
+            }, {
+                name: "Molex",
+                product: "Digital Tools"
             }
         ];
 

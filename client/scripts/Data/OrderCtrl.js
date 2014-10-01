@@ -18,7 +18,80 @@
                 var obj = $scope.orders[key];
                 total += obj['amount'];
             }
-            console.log(total);
+
+            return total;
+        };
+
+
+//        var ced = {
+//            total: function() {
+
+//                var total = 0;
+//                for (var key in $scope.orders) {
+//                    if($scope.orders[key]['distributor'] === "CED"){
+//                        total += $scope.orders[key]['amount'];
+//                    }
+//                }
+//                return total;
+//            },
+//            percent: function () {
+//
+//                var ced =$scope.cedTotal();
+//                var total = $scope.orderTotals();
+//                return (ced/total) * 100;
+//
+//            }
+//
+//        };
+
+        $scope.cedTotal = function() {
+            var total = 0;
+            for (var key in $scope.orders) {
+                if($scope.orders[key]['distributor'] === "CED"){
+                    total += $scope.orders[key]['amount'];
+                }
+            }
+            return total;
+        };
+        $scope.cedPercent = function () {
+
+            var ced =$scope.cedTotal();
+            var total = $scope.orderTotals();
+            return (ced/total) * 100;
+
+        };
+
+
+
+
+        $scope.wescoTotal = function() {
+            var total = 0;
+            for (var key in $scope.orders) {
+                if($scope.orders[key]['distributor'] === "WESCO"){
+                    total += $scope.orders[key]['amount'];
+                }
+            }
+            return total;
+        };
+
+        $scope.codaleTotal = function() {
+            var total = 0;
+            for (var key in $scope.orders) {
+                if($scope.orders[key]['distributor'] === "CODALE"){
+                    total += $scope.orders[key]['amount'];
+                }
+            }
+            return total;
+        };
+
+        $scope.graybarTotal = function() {
+            var total = 0;
+            for (var key in $scope.orders) {
+                if($scope.orders[key]['distributor'] === "GRAYBAR"){
+                    total += $scope.orders[key]['amount'];
+                }
+            }
+            return total;
         };
 
 
