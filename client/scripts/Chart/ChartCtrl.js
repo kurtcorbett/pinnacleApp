@@ -55,7 +55,7 @@
         }
       };
       $scope.easypiechart = {
-        percent: 65,
+        percent: 50,
         options: {
           animate: {
             duration: 1000,
@@ -68,7 +68,7 @@
         }
       };
       $scope.easypiechart2 = {
-        percent: 35,
+        percent: 50,
         options: {
           animate: {
             duration: 1000,

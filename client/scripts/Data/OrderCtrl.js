@@ -22,6 +22,15 @@
             return total;
         };
 
+        $scope.numOrders = $scope.orders.length;
+        $scope.pie1 = {
+
+            percent:78
+        };
+
+        $scope.pie2 = {
+            percent: 53
+        };
 
 //        var ced = {
 //            total: function() {
@@ -61,6 +70,8 @@
 
         };
 
+        $scope.progress = 60;
+
 
 
 
@@ -74,6 +85,16 @@
             return total;
         };
 
+        $scope.wescoPercent = function () {
+
+            var wesco =$scope.wescoTotal();
+            var total = $scope.orderTotals();
+            return (wesco/total) * 100;
+
+        };
+
+
+
         $scope.codaleTotal = function() {
             var total = 0;
             for (var key in $scope.orders) {
@@ -84,6 +105,14 @@
             return total;
         };
 
+        $scope.codalePercent = function () {
+
+            var codale =$scope.codaleTotal();
+            var total = $scope.orderTotals();
+            return (codale/total) * 100;
+
+        };
+
         $scope.graybarTotal = function() {
             var total = 0;
             for (var key in $scope.orders) {
@@ -92,6 +121,14 @@
                 }
             }
             return total;
+        };
+
+        $scope.graybarPercent = function () {
+
+            var graybar =$scope.graybarTotal();
+            var total = $scope.orderTotals();
+            return (graybar/total) * 100;
+
         };
 
 
